@@ -1,0 +1,5 @@
+tornado==6.1
+transformers==4.5.2
+torch==1.13.1
+chess==1.9.2
+requests
