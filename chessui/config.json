@@ -1,0 +1,8 @@
+{
+  "server-log": "server.log",
+  "server-protocol": "http://",
+  "server-port": "8081",
+  "server-ip": "127.0.0.1"
+}
+
+

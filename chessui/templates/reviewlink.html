@@ -1,0 +1,450 @@
+{% extends "base.html" %}
+<p id= "history"> </p>
+{% block title %}Search offer{% end %}
+
+{% block main %}
+
+<style>
+  footer{ 
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    font: inherit;
+    color: inherit;
+    list-style-type: none;
+    -webkit-box-direction: normal;
+    box-sizing: border-box;
+    display: block;
+    padding: 10px;
+    background-color: rgba(68, 71, 83, 0.8);
+    font-size: 0.95rem;
+    position: relative;
+    float: left;
+    color: #fff;
+    /* width: 100%;  */
+  }
+  body{
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    background-color: #fff;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: 14px 'Roboto', sans-serif;
+    line-height: 1.5;
+    color: rgb(0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    background-image: linear-gradient(to right, #b3caa3 0%, #8fbb8c 0%, #c7c7c7 0%, #a0be8f 50%, #aaaaaa 64%, #a3bba0 100%);
+    width: 100%;
+  }
+  header{ 
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    font: inherit;
+    color: inherit;
+    list-style-type: none;
+    -webkit-box-direction: normal;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 1.2rem;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+  }
+ 
+  div.flex.flex-column.wrapper{
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    box-sizing: inherit;
+    font: inherit;
+    color: inherit;
+    vertical-align: middle;
+    outline: none;
+    padding: 0;
+    border: 0;
+    list-style-type: none;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+  }
+  html{
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: 14px 'Roboto', sans-serif;
+    line-height: 1.5;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  .timer__items {
+    display: flex;
+    font-size: 26px;
+  }
+  .timer__item {
+    position: relative;
+    min-width: 30px;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 0px;
+    padding-bottom: 15px;
+    text-align: center;
+    
+  }
+  .timer__item::before {
+    content: attr(data-title);
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    font-size: 14px;
+  }
+  .timer__item:not(:last-child)::after {
+    /* content: ':'; */
+    position: absolute;
+    right: -15px;
+  }
+
+  .side_story{
+    display:flex;	
+  }
+
+  .bottom_story{
+    display:none;	
+  }
+
+  .title_left{
+    font-size: 18px;
+  }
+   .title_right{
+    font-size: 18px;
+  }
+
+  .header{
+    color: #fff;
+    font-size: 1.55rem;
+  }
+
+
+  @media only screen and (max-width: 580px){
+	.side_story{
+		display:none;	
+	}
+  
+  .bottom_story{
+		display:flex;	
+	}
+
+  .timer__items {
+    font-size: 1rem;
+  }
+
+  .footer {
+    width: 100%;
+  }
+
+  .timer__item::before { 
+    font-size: 1rem;
+  }
+
+  .header{
+    font-size: 0.95rem;
+  }
+	
+}
+
+</style>
+
+
+<body cz-shortcut-listen="true" style="background-color:#dbdbdb">
+  <div class="wrapper flex flex-column">
+  <div class="toast_outer">
+  <div id="type_warning" class="toast hide"></div>
+  </div>
+  <header class="flex header">
+  <span><b>Techinal demo</b><br>Play chess with Transformer LLM</span>
+  </header>
+
+
+  
+  
+  <table style="width:100%">
+    <tr>
+      <th class="timer" >
+        <div class="timer__items">
+          <div class="timer__item">Player</div>
+          <div class="timer__item timer__minutes">00</div><span class="timer__item" style="min-width: 30px;">:</span>
+          <div class="timer__item timer__seconds">00</div>
+        </div>
+      </th>
+      <th class="timer" >
+        <div class="timer__items">
+          <div class="timer__item">Model</div>
+          <div  class="timer__item timer__minutes1">00</div><span class="timer__item"  style="min-width: 30px;">:</span>
+          <div  class="timer__item timer__seconds1">00</div>
+        </div>
+      </th>
+    </tr>
+  </table>
+  
+  <form method= "POST" action="/">
+  </form>
+  <!--color: #bababa  color:#262421  -->
+  <div  class="container-fluid" style="float:left; width: 100%; display:flex;flex-wrap:nowrap" >
+    <div  class="container-fluid" style="float:left;  display:flex;flex-wrap:nowrap" >
+    </div>
+    
+    <div id="board1" style=" width:  100%; float:none;display:flex;"></div>
+    
+    <form  class='side_story' style="position:relative; flex-wrap:wrap;float:left">
+      <div class="container-fluid" style=" text-align:center; width: 100%;height: 90%; background-color:#dbdbdb;float:left;padding-right: 15px; padding-left: 15px;flex-wrap:wrap;">
+        <h2 style="display:flex;flex-wrap:wrap"> Game status: </h2>
+        <p></p>
+        <div id="gamestatus"  style="text-align:left;  font-size: 20px; float:left;display:flex;"></div>
+        <p></p>
+        <h2 style="text-align:left;"> History of moves: </h2>
+        <p></p>
+        <div id="history"  style="text-align:left;  font-size: 20px; float:left;display:flex;"></div> 
+
+      </div>
+      <p></p>
+      <button style="width:100%; height: 10%; font-size: 15px;" type="submit" class="btn btn-primary btn-send">Restart</button>
+    </form>   
+  </div>
+  <form  class='bottom_story' style="position:relative; flex-wrap:wrap;float:left; margin-bottom: 15px">
+    <div class="container-fluid" style=" text-align:center; width: 100%;height: 90%; background-color:#dbdbdb;float:left;padding-right: 15px; padding-left: 15px;flex-wrap:wrap;">
+      <h5 style="display:flex;flex-wrap:wrap"> Game status: </h5>
+      <p></p>
+      <div id="gamestatus_bottom"  style="text-align:left;  font-size: 10px; float:left;display:flex;"></div>
+      <p></p>
+      <h5 style="text-align:left;"> History of moves: </h5>
+      <p></p>
+      <div id="history_bottom"  style="text-align:left;  font-size: 10px; float:left;display:flex;"></div> 
+
+    </div>
+    <p></p>
+    <button style="width:100%; height: 10%; font-size: 15px; min-height: 30px;" type="submit" class="btn btn-primary btn-send">Начать заново</button> 
+  </form> 
+  <footer> 
+  <div style="position:relative; float:left; width:100%">
+  <div style="position:relative; float:left; width:40%">
+  <span style="font-size: 1rem;">
+  <br>Email for questions info@meanotek.io</span>
+  </div>
+  <div class="text-right" style="position:relative; float:right; width:55%">
+  <div>Blog post about the code (in Russian)</div>
+  <span style="font-size: 1rem;">Chess article <a class="review" href="https://habr.com/ru/company/meanotek/blog/690668/" target="_blank">article link</a></span>
+  </div>
+  </div>
+  </footer>
+  </div>
+  
+</body>
+
+
+<script>
+document.title = 'Chess Meanotek';
+difference = new Date('December 01, 2024 00:20:00')
+function timer() {
+  // приращение секунд и минут
+  addseconds = 0
+  addmin = 0
+  // id таймера
+  let timerId = null;
+  // склонение числительных
+  function declensionNum(num, words) {
+    return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
+  }
+  // time difference
+  function countdownTimer() {
+    const diff = difference - new Date('December 01, 2024 00:' + addmin +':' + addseconds); 
+    if (diff <= 0) {
+      clearInterval(TimerPlayerId);
+    }
+    const minutes = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+    const seconds = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+    $minutes.textContent = minutes < 10 ? '0' + minutes : minutes;
+    $seconds.textContent = seconds < 10 ? '0' + seconds : seconds;
+    $minutes.dataset.title = declensionNum(minutes, ['minutes', 'minutes', 'minutes']);
+    $seconds.dataset.title = declensionNum(seconds, ['seconds', 'seconds', 'seconds']);
+
+    addseconds += 1
+    if (addseconds == 60)
+      {
+        addmin += 1 
+        addseconds = 0
+      }
+    //document.getElementById("gamestatus").innerHTML = $minutes.textContent
+    if ($seconds.textContent == '00' && $minutes.textContent == '00')
+      {
+        document.getElementById("gamestatus").innerHTML = 'You are out of time (but you can continue game)';
+      }
+  }
+  // получаем элементы, содержащие компоненты даты
+  const $minutes = document.querySelector('.timer__minutes');
+  const $seconds = document.querySelector('.timer__seconds');
+  // вызываем функцию countdownTimer
+  countdownTimer();
+  // вызываем функцию countdownTimer каждую секунду
+  TimerPlayerId = setInterval(countdownTimer, 1000);
+}
+difference_model = new Date('December 01, 2024 00:20:00')
+function timermodel() {
+  // приращение секунд и минут
+  addseconds1 = 0
+  addmin1 = 0
+  // id таймера
+  let timerId = null;
+  // склонение числительных
+  function declensionNum(num, words) {
+    return words[(num % 100 > 4 && num % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(num % 10 < 5) ? num % 10 : 5]];
+  }
+  // time diffirence
+  function countdownTimer1() {
+    const diff = difference_model - new Date('December 01, 2024 00:' + addmin1 +':' + addseconds1); 
+    if (diff <= 0) {
+      clearInterval(TimerModelId);
+    }
+    const minutes1 = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+    const seconds1 = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+    $minutes1.textContent = minutes1 < 10 ? '0' + minutes1 : minutes1;
+    $seconds1.textContent = seconds1 < 10 ? '0' + seconds1 : seconds1;
+    $minutes1.dataset.title = declensionNum(minutes1, ['minutes', 'minutes', 'minutes']);
+    $seconds1.dataset.title = declensionNum(seconds1, ['seconds', 'seconds', 'seconds']);
+
+    addseconds1 += 1
+    if (addseconds1 == 60)
+      {
+        addmin1 += 1 
+        addseconds1 = 0
+      }
+    //document.getElementById("gamestatus").innerHTML = $minutes.textContent
+    if ($seconds1.textContent == '00' && $minutes1.textContent == '00')
+      {
+        document.getElementById("gamestatus").innerHTML = 'model is out of time (but game can continue) ';
+      }
+  }
+  // получаем элементы, содержащие компоненты даты
+  const $minutes1 = document.querySelector('.timer__minutes1');
+  const $seconds1 = document.querySelector('.timer__seconds1');
+  // вызываем функцию countdownTimer
+  countdownTimer1();
+  // вызываем функцию countdownTimer каждую секунду
+  TimerModelId = setInterval(countdownTimer1, 1000);
+}
+
+function  gameUpdate(source, target)
+    {
+        var xhr = new XMLHttpRequest();
+        var url = '?source='+encodeURIComponent(source)+'&target='+encodeURIComponent(target)  ;
+        xhr.open("POST", url, true);
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+
+
+                const jsontext = this.responseText;
+                const json_obj = JSON.parse(jsontext);
+
+                var dictendings = {"0-1CHECKMATE":"0-1, Black wins (checkmate)",
+                "1-0CHECKMATE":"1-0,  White wins (checkmate)",
+                "1/2-1/2STALEMATE":"1/2-1/2, Draw",
+                "1/2-1/2FIVEFOLD_REPETITION":"1/2-1/2, Draw (repeated moves)",
+                "1/2-1/2INSUFFICIENT_MATERIAL":"1/2-1/2, Draw",
+                "Model can not generate a legal move.<br>White wins":"Model can not generate a legal move.<br>White wins",
+                "Server error. Try again later.":"Server error. Try again later.",
+                "":""};
+                //document.getElementById("history").innerHTML = "History of model moves: " + json_obj.model_move + " history: " + json_obj.history_move1;
+                document.getElementById("history").innerHTML = json_obj.history_move1;
+                document.getElementById("gamestatus").innerHTML = document.getElementById("gamestatus").textContent + dictendings[json_obj.gamestatus]; //document.getElementById("gamestatus").textContent +
+
+                document.getElementById("history_bottom").innerHTML = json_obj.history_move1;
+                document.getElementById("gamestatus_bottom").innerHTML = json_obj.gamestatus;
+                board1.move(json_obj.model_move);
+                game.move({from:json_obj.model_move.split("-")[0],to:json_obj.model_move.split("-")[1], promotion: 'q'});
+              
+                onSnapEnd()
+                switchingtimer()
+
+                // if (json_obj.model_move == 'e8-g8' || json_obj.model_move == 'e8-c8' || json_obj.movewithq[5] == 'q' ) {  
+                //   //document.getElementById("history").innerHTML = "Handler executed"   bgcolor="#262421"
+                //   onSnapEnd()
+                // }
+                
+            }
+        }
+        xhr.send();
+    }
+
+var game={};
+var timer_is_on = false;
+function onDrop (source, target) {
+  if (timer_is_on == false)
+    {
+      timer()
+      timer_is_on =true
+    }
+  
+  // see if the move is legal
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  })
+  // illegal move
+  if (move === null) {
+    return 'snapback'
+  }
+
+  difference = difference - addmin*60*1000 - addseconds*1000;
+  clearInterval(TimerPlayerId);
+  timermodel()
+  gameUpdate(source,target)
+}
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board1.position(game.fen())
+}
+
+function switchingtimer() {
+  difference_model = difference_model - addmin1*60*1000 - addseconds1*1000;
+  clearInterval(TimerModelId);
+  timer()
+}
+
+var config = {
+  draggable: true,
+  position: 'start',
+  onDrop:onDrop,
+  onSnapEnd:onSnapEnd}
+var board1 = Chessboard('board1', config)
+//var id_user = Crypto.randomUUID()
+
+</script>
+
+<script src="https://unpkg.com/chess.js@0.12.0/chess.js"> </script>
+
+<script>
+game = new Chess();
+
+</script>
+
+<script>
+  
+</script> 
+
+{% end %}
