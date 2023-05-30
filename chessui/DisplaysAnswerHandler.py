@@ -2,7 +2,6 @@ from posixpath import split
 from typing import List
 import tornado.web
 import json
-import scratch.forms as forms
 import time
 import traceback
 import logging
@@ -66,7 +65,6 @@ class DisplayFormHandler(tornado.web.RequestHandler):
         print('user cookie: ', self.get_secure_cookie("user"))
         #self.clear_cookie("user")
 
-        #chessboard_form =  forms.NodeForm({"history_move":"label","count_move":"hidden","human_move":"editbox","model_move":"editbox"})
         clear_users()
 
 
