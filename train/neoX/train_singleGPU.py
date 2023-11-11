@@ -51,8 +51,9 @@ def _attn_wrapper(self, query, key, value, attention_mask=None, head_mask=None):
 #GPTNeoXAttention._attn = _attn_wrapper
 old = GPTNeoXAttention._attn
 GPTNeoXAttention._attn = _attn_wrapper
-#model_path = "EleutherAI/pythia-410m-deduped"
-model_path = "./410M"
+#Set model path
+model_path = "EleutherAI/pythia-410m-deduped"
+#model_path = "./410M"
 
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 tokenizer.pad_token = tokenizer.eos_token
